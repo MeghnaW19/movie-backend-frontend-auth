@@ -1,0 +1,4 @@
+com/stackroute/moviecruiser/controllerTest/UserControllerTest.class
+com/stackroute/moviecruiser/MovieCruiserAuthentication/MovieCruiserAuthenticationApplicationTests.class
+com/stackroute/moviecruiser/services/UserServiceImplTest.class
+com/stackroute/moviecruiser/repositories/UserRepoTest.class

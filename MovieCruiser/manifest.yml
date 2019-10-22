@@ -1,0 +1,5 @@
+applications:
+- name: movieCruiser
+  instances: 1
+  services:
+    - movie-mysql

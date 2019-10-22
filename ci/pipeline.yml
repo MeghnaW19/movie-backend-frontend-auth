@@ -1,0 +1,38 @@
+---
+resources:
+- name: movie_fsd
+  type: git
+  source:
+    uri: https://gitlab-cts.stackroute.in/MUTHAMILARASAN.D/movie-fsd.git  #<----- REPLACE ME
+    branch: master
+
+- name: deploy-movie_fsd
+  type: cf
+  source:
+    api: http://api.run.pivotal.io        #<----- REPLACE ME
+    username: {{cf-user}}
+    password: {{cf-password}}
+    organization: mduraikannu-pal    #<----- REPLACE ME
+    space: sandbox         #<----- REPLACE ME
+    skip_cert_check: false
+
+jobs:
+- name: deploy
+  public: true
+  plan:
+  - get: movie_fsd
+    trigger: true
+  - task: package
+    file: movie_fsd/ci/tasks/package.yml
+  - put: deploy-movie_fsd
+    params:
+      manifest: movie_fsd/MovieCruiser/manifest.yml
+      path: package-output/movie_crusier.jar
+  - put: deploy-movie_fsd
+    params:
+      manifest: movie_fsd/MovieAuth/manifest.yml
+      path: package-output/movie_auth.jar
+  - put: deploy-movie_fsds
+    params:
+      manifest: movie_fsd/MovieCruiserUI/manifest.yml
+
